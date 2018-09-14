@@ -1,6 +1,5 @@
 package simpleBlackJack;
 
-import java.util.Random;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Collections;
@@ -8,7 +7,6 @@ import java.util.Collections;
 
 public class Deck {
 
-    private  Random rand = new Random();
     private List<Card> deck;
 
     //constructor
