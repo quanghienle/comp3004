@@ -25,7 +25,7 @@ public class DeckTest {
         Deck myDeck = new Deck();
         myDeck.deckShuffle();
 
-        Card firstCard = myDeck.getDeck().getFirst();
+        Card firstCard = myDeck.getDeck().get(0);
         Card cardFromDeck = myDeck.drawCard();
 
         assertTrue(firstCard.equals(cardFromDeck));

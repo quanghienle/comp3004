@@ -9,7 +9,7 @@ public class HandTest {
         Card ex = new Card("DQ");
         user.addCard(ex);
 
-        assertTrue(user.getPlayerCard(0).equals(ex));
+        assertTrue(user.getCard(0).equals(ex));
     }
 
     public void testScore(){
