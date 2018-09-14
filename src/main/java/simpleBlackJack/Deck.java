@@ -10,10 +10,12 @@ public class Deck {
     private List<Card> deck;
 
     //constructor
-    public Deck(){
+    public Deck() {
         //deck stores 52 cards as a linkedlist
         this.deck = new LinkedList<Card>();
+    }
 
+    public void generateWholeDeck(){
         //initialize cards of a deck
         for(int i=0; i< Card.Rank.length; i++ ) {
             for (int k = 0; k < Card.Suit.length; k++) {
@@ -23,7 +25,7 @@ public class Deck {
 
     }
 
-    public Deck(String[] cards){
+    public void generateGivenCards(String[] cards){
 
         this.deck = new LinkedList<Card>();
 
