@@ -23,6 +23,18 @@ public class Deck {
 
     }
 
+    public Deck(String[] cards){
+
+        this.deck = new LinkedList<Card>();
+
+        //initialize cards of a deck with given cards
+        for(int i=0; i< cards.length; i++ ) {
+            this.deck.add(new Card(cards[i]));
+        }
+
+    }
+
+
     //shuffle the deck
     public void deckShuffle(){
         //Shuffle the whole deck
