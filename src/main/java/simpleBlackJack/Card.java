@@ -43,7 +43,7 @@ public class Card {
         }
         return 0;
     }
-
+    /*
     @Override
     public boolean equals(Object o) {
         //object is itself
@@ -57,7 +57,7 @@ public class Card {
 
         // Compare rank and suit
         return this.rank.equals(c.getRank()) && this.suit.equals(c.getSuit());
-    }
+    }*/
 
     @Override
     public String toString(){
