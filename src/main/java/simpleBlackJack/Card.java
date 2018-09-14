@@ -46,16 +46,11 @@ public class Card {
 
     @Override
     public boolean equals(Object o) {
-
         //object is itself
-        if (o == this) {
-            return true;
-        }
+        if (o == this) { return true; }
 
         // Check if o is an instance of Card
-        if (!(o instanceof Card)) {
-            return false;
-        }
+        if (!(o instanceof Card)) { return false; }
 
         // typecast o to Card
         Card c = (Card) o;
