@@ -2,10 +2,10 @@ package simpleBlackJack;
 
 import static org.junit.Assert.*;
 
-public class PlayerTest {
+public class HandTest {
 
     public void testAddCard(){
-        Player user = new Player();
+        Hand user = new Hand();
         Card ex = new Card("DQ");
         user.addCard(ex);
 
@@ -13,7 +13,7 @@ public class PlayerTest {
     }
 
     public void testScore(){
-        Player user = new Player();
+        Hand user = new Hand();
 
         Card card_1 = new Card("DQ");
         Card card_2 = new Card("H10");
@@ -31,7 +31,7 @@ public class PlayerTest {
     }
 
     public void testBusted(){
-        Player user = new Player();
+        Hand user = new Hand();
 
         Card card_1 = new Card("DQ");
         Card card_2 = new Card("H10");

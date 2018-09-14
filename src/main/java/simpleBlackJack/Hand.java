@@ -1,4 +1,4 @@
 package simpleBlackJack;
 
-public class Dealer {
+public class Hand {
 }
