@@ -6,29 +6,33 @@ public class DeckTest {
 
     public void testNumCards(){
         Deck myDeck = new Deck();
+        myDeck.generateWholeDeck();
         assertEquals(52, myDeck.getNumCards());
     }
 
     public void testShuffle(){
         Deck myDeck = new Deck();
-        Card unshuffled_1 = myDeck.getDeck().get(10);
-        Card unshuffled_2 = myDeck.getDeck().get(20);
+        String[] cards = {"H6", "CK", "D3"};
+        myDeck.generateGivenCards(cards);
+
+
 
         myDeck.deckShuffle();
-        Card shuffled_1 = myDeck.getDeck().get(10);
-        Card shuffled_2 = myDeck.getDeck().get(20);
+        Card card_1 = myDeck.getDeck().get(0);
+        Card card_2 = myDeck.getDeck().get(1);
+        Card card_3 = myDeck.getDeck().get(2);
 
-        assertFalse(unshuffled_1.equals(shuffled_1) && unshuffled_2.equals(shuffled_2));
+        assertFalse(card_1.toString().equals("H6") && card_2.toString().equals("CK") && card_3.toString().equals("D3"));
 
     }
     public void testDrawCard(){
         Deck myDeck = new Deck();
-        myDeck.deckShuffle();
+        String[] cards = {"H6", "CK", "D3"};
+        myDeck.generateGivenCards(cards);
 
-        Card firstCard = myDeck.getDeck().get(0);
-        Card cardFromDeck = myDeck.drawCard();
+        Card myCard = myDeck.drawCard();
 
-        assertTrue(firstCard.equals(cardFromDeck));
+        assertTrue(myCard.toString().equals("H6"));
         assertEquals(51, myDeck.getNumCards());
     }
 
