@@ -6,11 +6,9 @@ import java.util.ArrayList;
 public class Hand {
 
     private List<Card> hand;
-    private boolean busted;
 
     public Hand(){
         this.hand = new ArrayList<Card>();
-        this.busted = false;
     }
 
     public Card getCard(int index) {
@@ -42,14 +40,29 @@ public class Hand {
             }
         }
 
-        //last check if it busts
-        busted = (score>21) ? true : false;
-
         return score;
     }
 
+    public boolean blackJack(){
+        String rank1 = this.getCard(0).getRank();
+        String rank2 = this.getCard(1).getRank();
+
+        //after this step, hand has to have an A
+        if(!rank1.equals("A") && !rank2.equals("A")){
+            return false;
+        }
+        //in this step, hand must have a J, Q, or K
+        if(rank1.equals("J") || rank1.equals("Q") || rank1.equals("K") ||
+                rank2.equals("J") || rank2.equals("Q") || rank2.equals("K")){
+            return true;
+        }
+        return false;
+
+    }
+
     public boolean bustCheck(){
-        return this.busted;
+        int score = this.getScore();
+        return (score>21) ? true : false;
     }
 }
 

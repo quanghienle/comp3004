@@ -30,6 +30,26 @@ public class HandTest {
 
     }
 
+    public void testBlackjack(){
+        Hand user = new Hand();
+
+        Card card_1 = new Card("DQ");
+        Card card_2 = new Card("H10");
+        Card card_3 = new Card("CA");
+
+        user.addCard(card_1);
+        user.addCard(card_2);
+
+        assertFalse(user.blackJack());
+
+        Hand user2 = new Hand();
+
+        user2.addCard(card_1);
+        user2.addCard(card_3);
+
+        assertTrue(user2.blackJack());
+    }
+
     public void testBusted(){
         Hand user = new Hand();
 
