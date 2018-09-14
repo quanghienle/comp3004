@@ -34,4 +34,12 @@ public class CardTest {
         assertEquals("10",card_3.getRank());
         assertEquals("k",card_4.getRank());
     }
+
+    public void testCardEqual(){
+
+        Card card_3 = new Card("CK");
+        Card card_4 = new Card("CK");
+
+        assertTrue(card_3.equals(card_4));
+    }
 }
