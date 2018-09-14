@@ -25,7 +25,7 @@ public class PlayerTest {
         assertEquals(20, user.getScore());
 
         user.addCard(card_3);
-
+        //this ace will act as 1
         assertEquals(21, user.getScore());
 
     }
