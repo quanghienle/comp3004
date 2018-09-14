@@ -23,16 +23,16 @@ public class Card {
         }
     }
 
-    private String getRank(){
+    public String getRank(){
         return this.rank;
     }
 
-    private String getSuit(){
+    public String getSuit(){
         return suit;
     }
 
     //get numeral value of the card
-    private int getCardValue(boolean bustedHand){
+    public int getCardValue(boolean bustedHand){
         for(int i=0; i<9; i++)
             if (this.rank.equals(Rank[i])) return i + 2;
 
