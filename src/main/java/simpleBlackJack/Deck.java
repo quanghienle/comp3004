@@ -26,23 +26,23 @@ public class Deck {
     }
 
     //shuffle the deck
-    private void deckShuffle(){
+    public void deckShuffle(){
         //Shuffle the whole deck
         Collections.shuffle(this.deck);
     }
 
     //get number of cards in the deck
-    private int getNumCards(){
+    public int getNumCards(){
         return this.deck.size();
     }
 
     //get deck: list of cards
-    private List<Card> getDeck(){
+    public List<Card> getDeck(){
         return this.deck;
     }
 
     //withdraw the first card from the deck
-    private Card drawCard(){
+    public Card drawCard(){
         //return the first card if deck has more than 0 cards
         return getNumCards() != 0 ? this.deck.remove(0) : null;
     }
