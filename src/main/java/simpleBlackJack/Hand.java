@@ -64,5 +64,16 @@ public class Hand {
         int score = this.getScore();
         return (score>21) ? true : false;
     }
+
+    @Override
+    public String toString(){
+        String cards = "";
+
+        for(int i=0; i < this.hand.size(); i++){
+            cards += "[" + this.getCard(i) + "]  ";
+        }
+
+        return cards;
+    }
 }
 
