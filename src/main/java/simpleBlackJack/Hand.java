@@ -114,6 +114,13 @@ public class Hand {
         return false;
     }
 
+    public boolean hasIdenticalCards(){
+        if(this.getCard(0).getRank().equals(this.getCard(1).getRank())){
+            return true;
+        }
+        return false;
+    }
+
     //prints cards' name in console
     @Override
     public String toString(){
