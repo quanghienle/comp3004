@@ -85,4 +85,23 @@ public class HandTest {
         assertTrue(user.bustCheck());
     }
 
+    //testing the first two having the same rank
+    public void testIdenticalCards(){
+        Hand user = new Hand("Player");
+        Hand user2 = new Hand("Player");
+
+        Card c1 = new Card("DQ");
+        Card c2 = new Card("CQ");
+        Card c3 = new Card("DJ");
+
+        user.addCard(c1);
+        user.addCard(c2);
+
+        user2.addCard(c1);
+        user2.addCard(c3);
+
+        assertTrue(user.hasIdenticalCards());
+        assertFalse(user2.hasIdenticalCards());
+    }
+
 }
