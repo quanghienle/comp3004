@@ -8,19 +8,36 @@ public class Card {
 
     private String rank;
     private String suit;
+    private int cardValue;
 
     //constructor
     public Card(String newCard) {
-        if (newCard.length() == 2) {
-            this.rank = newCard.charAt(1) + "";
-            this.suit = newCard.charAt(0) + "";
+        newCard = newCard.toUpperCase();
+        this.suit = newCard.charAt(0) + "";
+        this.rank =  newCard.substring(1);
+
+        //set the value of the card
+        for(int i=0; i<Rank.length; i++){
+            if(this.rank.equals(Rank[i])){
+                if(i>=9 && i<=11){
+                    this.cardValue = 10;
+                }else if(i == 12){
+                    this.cardValue = 11;
+                }else {
+                    this.cardValue = Integer.parseInt(Rank[i]);
+                }
+            }
         }
 
-        if (newCard.length() == 3) {
-            this.rank = newCard.charAt(2) + "";
-            this.suit = newCard.charAt(0) + newCard.charAt(1) + "";
+    }
 
-        }
+    //set the card value
+    public void setCardValue(int num){
+        this.cardValue = num;
+    }
+    //get numeral value of the card
+    public int getCardValue(){
+        return this.cardValue;
     }
 
     public String getRank(){
@@ -31,33 +48,22 @@ public class Card {
         return suit;
     }
 
-    //get numeral value of the card
-    public int getCardValue(boolean bustedHand){
-        for(int i=0; i<9; i++)
-            if (this.rank.equals(Rank[i])) return i + 2;
-
-        if(this.rank.equals("J") || this.rank.equals("Q") || this.rank.equals("K")){
-            return 10;
-        }else if (this.rank.equals("A")){
-            return bustedHand ? 1 : 11;
+    public static boolean checkValidCard(String c){
+        if(c.length()<2 || c.length()>3){
+            return false;
         }
-        return 0;
+        String cardSuit = c.charAt(0) + "";
+        String cardRank =  c.substring(1);
+
+        for(String r: Rank){
+            for(String s: Suit){
+                if(cardRank.equals(r) && cardSuit.equals(s)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-    /*
-    @Override
-    public boolean equals(Object o) {
-        //object is itself
-        if (o == this) { return true; }
-
-        // Check if o is an instance of Card
-        if (!(o instanceof Card)) { return false; }
-
-        // typecast o to Card
-        Card c = (Card) o;
-
-        // Compare rank and suit
-        return this.rank.equals(c.getRank()) && this.suit.equals(c.getSuit());
-    }*/
 
     @Override
     public String toString(){
