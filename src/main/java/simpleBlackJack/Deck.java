@@ -15,23 +15,22 @@ public class Deck {
         this.deck = new LinkedList<Card>();
     }
 
+    //generates all possible combinations of 4 suits and 13 ranks
     public void generateWholeDeck(){
-        //initialize cards of a deck
-        for(int i=0; i< Card.Rank.length; i++ ) {
-            for (int k = 0; k < Card.Suit.length; k++) {
-                this.deck.add(new Card(Card.Suit[i]+ Card.Rank[k]));
+        for(String r: Card.Rank) {
+            for (String s: Card.Suit) {
+                this.deck.add(new Card(s + r));
             }
         }
 
     }
 
-    public void generateGivenCards(String[] cards){
-
-        this.deck = new LinkedList<Card>();
+    //generates and deck with given cards
+    public void generateGivenCards(List<String> cards){
 
         //initialize cards of a deck with given cards
-        for(int i=0; i< cards.length; i++ ) {
-            this.deck.add(new Card(cards[i]));
+        for(int i=0; i< cards.size(); i++ ) {
+            this.deck.add(new Card(cards.get(i)));
         }
 
     }
@@ -57,5 +56,17 @@ public class Deck {
     public Card drawCard(){
         //return the first card if deck has more than 0 cards
         return getNumCards() != 0 ? this.deck.remove(0) : null;
+    }
+
+    //output the whole deck
+    @Override
+    public String toString(){
+        String cards = "";
+
+        for(int i=0; i < this.deck.size(); i++){
+            cards += "[" +this.deck.get(i) + "]  ";
+        }
+
+        return cards;
     }
 }
