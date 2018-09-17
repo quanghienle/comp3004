@@ -10,11 +10,12 @@ public class CardTest {
         Card card_3 = new Card("D10");
         Card card_4 = new Card("CK");
 
-        assertEquals(1,card_1.getCardValue(true));
-        assertEquals(11,card_1.getCardValue(false));
-        assertEquals(5,card_2.getCardValue(false));
-        assertEquals(10,card_3.getCardValue(false));
-        assertEquals(10,card_4.getCardValue(false));
+        assertEquals(11,card_1.getCardValue());
+        card_1.setCardValue(1);
+        assertEquals(1,card_1.getCardValue());
+        assertEquals(5,card_2.getCardValue());
+        assertEquals(10,card_3.getCardValue());
+        assertEquals(10,card_4.getCardValue());
     }
 
     public void testCardSuit(){
@@ -35,4 +36,11 @@ public class CardTest {
         assertEquals("k",card_4.getRank());
     }
 
+    public void testValidCard(){
+        String[] cards = {"AS", "SA", "S"};
+
+        assertFalse(Card.checkValidCard(cards[0]));
+        assertTrue(Card.checkValidCard(cards[1]));
+        assertFalse(Card.checkValidCard(cards[2]));
+    }
 }
