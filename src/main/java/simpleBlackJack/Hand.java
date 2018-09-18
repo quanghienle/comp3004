@@ -23,15 +23,11 @@ public class Hand {
         return this.type;
     }
     public Card getCard(int index) {
-
         return (index >= 0 && index < this.hand.size()) ? this.hand.get(index) : null;
     }
 
     //add a card object to this hand
-    public boolean addCard(Card c){
-
-        return (!bustCheck()) ? this.hand.add(c) : false;
-    }
+    public boolean addCard(Card c){ return (!bustCheck()) ? this.hand.add(c) : false; }
 
     public Card removeCard(int index){
         return this.hand.remove(index);
