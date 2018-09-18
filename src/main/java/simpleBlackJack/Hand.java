@@ -18,6 +18,7 @@ public class Hand {
     }
 
     //getters
+    public int getNumCards(){return this.hand.size();}
     public String getType(){
         return this.type;
     }
@@ -32,6 +33,9 @@ public class Hand {
         return (!bustCheck()) ? this.hand.add(c) : false;
     }
 
+    public Card removeCard(int index){
+        return this.hand.remove(index);
+    }
 
     //calculate how much this hand scores
     public int getScore(){
