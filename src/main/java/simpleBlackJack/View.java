@@ -55,7 +55,11 @@ public class View {
             user[i].addCard(deck.drawCard());
             user[i].addCard(deck.drawCard());
 
-            System.out.printf("%s has: %s %n", user[i].getType(), user[i].toString());
+            if(i==0) {
+                System.out.printf("%s has: %s %n", user[i].getType(), user[i].toString());
+            }else{
+                System.out.printf("%s has: [face_down] [%s] %n", user[i].getType(), user[i].getCard(1).toString());
+            }
         }
 
         for(int k=0; k<2; k++){

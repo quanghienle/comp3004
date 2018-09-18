@@ -34,6 +34,8 @@ public class Main {
         //since if both have blackjack, dealer will win.
         for(int i=1;i>=0; i--){
             if(user[i].hasBlackjack()){
+                System.out.printf(user[0].getType() + " has: %s %n", user[0].toString());
+                System.out.printf(user[1].getType() + " has: %s %n", user[1].toString());
                 System.out.printf("\n\n====> %s wins. ", user[i].getType());
                 return;
             }
