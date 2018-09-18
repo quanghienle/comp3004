@@ -1,9 +1,11 @@
 package simpleBlackJack;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class CardTest {
 
+    @Test
     public void testCardValue(){
         Card card_1 = new Card("SA");
         Card card_2 = new Card("H5");
@@ -18,6 +20,7 @@ public class CardTest {
         assertEquals(10,card_4.getCardValue());
     }
 
+    @Test
     public void testCardSuit(){
         Card card_1 = new Card("SA");
         Card card_2 = new Card("H5");
@@ -27,15 +30,17 @@ public class CardTest {
 
     }
 
+    @Test
     public void testCardRank(){
 
         Card card_3 = new Card("D10");
         Card card_4 = new Card("CK");
 
         assertEquals("10",card_3.getRank());
-        assertEquals("k",card_4.getRank());
+        assertEquals("K",card_4.getRank());
     }
 
+    @Test
     public void testValidCard(){
         String[] cards = {"AS", "SA", "S"};
 

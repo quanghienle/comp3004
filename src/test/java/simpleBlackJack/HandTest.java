@@ -1,9 +1,11 @@
 package simpleBlackJack;
 
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class HandTest {
 
+    @Test
     public void testAddCard(){
         Hand user = new Hand("Player");
         Card ex = new Card("DQ");
@@ -12,6 +14,7 @@ public class HandTest {
         assertEquals(user.getCard(0), ex);
     }
 
+    @Test
     public void testScore(){
         Hand user1 = new Hand("Player");
         Hand user2 = new Hand("Player");
@@ -34,7 +37,7 @@ public class HandTest {
         user2.addCard(card_2);
         user2.addCard(card_3);
 
-        assertEquals(19, user1.getScore());
+        assertEquals(19, user2.getScore());
 
         //A as 11 and 1
         user3.addCard(card_1);
@@ -42,11 +45,10 @@ public class HandTest {
         user3.addCard(card_3);
         user3.addCard(card_4);
 
-        assertEquals(20, user1.getScore());
-
-
+        assertEquals(20, user3.getScore());
     }
 
+    @Test
     public void testBlackjack(){
         Hand user = new Hand("Player");
         Hand user2 = new Hand("Player");
@@ -68,6 +70,7 @@ public class HandTest {
         assertTrue(user2.hasBlackjack());
     }
 
+    @Test
     public void testBusted(){
         Hand user = new Hand("Player");
 
@@ -85,6 +88,7 @@ public class HandTest {
         assertTrue(user.bustCheck());
     }
 
+    @Test
     //testing the first two having the same rank
     public void testIdenticalCards(){
         Hand user = new Hand("Player");
@@ -102,6 +106,24 @@ public class HandTest {
 
         assertTrue(user.hasIdenticalCards());
         assertFalse(user2.hasIdenticalCards());
+    }
+
+    public void testHasAce(){
+        Hand user = new Hand("Player");
+        Hand user2 = new Hand("Player");
+
+        Card c1 = new Card("DQ");
+        Card c2 = new Card("CQ");
+        Card c3 = new Card("DA");
+
+        user.addCard(c1);
+        user.addCard(c2);
+
+        user2.addCard(c1);
+        user2.addCard(c3);
+
+        assertFalse(user.hasAce());
+        assertTrue(user2.hasAce());
     }
 
 }

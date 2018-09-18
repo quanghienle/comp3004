@@ -3,10 +3,13 @@ package simpleBlackJack;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class DeckTest {
 
+    @Test
     public void testNumCards(){
 
         //the whole legit deck of cards has 52 cards
@@ -25,6 +28,7 @@ public class DeckTest {
         assertEquals(3, myDeck2.getNumCards());
     }
 
+    @Test
     public void testShuffle(){
         Deck myDeck = new Deck();
         List<String> cards = new ArrayList<String>();
@@ -45,6 +49,8 @@ public class DeckTest {
         assertFalse(card_1.toString().equals("H6") && card_2.toString().equals("CK") && card_3.toString().equals("D3"));
 
     }
+
+    @Test
     public void testDrawCard(){
         Deck myDeck = new Deck();
         List<String> cards = new ArrayList<String>();
@@ -56,10 +62,12 @@ public class DeckTest {
         myDeck.generateGivenCards(cards);
 
 
-        Card myCard = myDeck.drawCard();
 
+        Card myCard = myDeck.drawCard();
         assertTrue(myCard.toString().equals("H6"));
-        assertTrue(myCard.toString().equals("CK"));
+
+        Card myCard2 = myDeck.drawCard();
+        assertTrue(myCard2.toString().equals("CK"));
     }
 
 }
