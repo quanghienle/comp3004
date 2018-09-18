@@ -12,18 +12,57 @@ public class View {
         Scanner scan = new Scanner(System.in);
         char input = ' ';
 
-        while(input != 'c' && input != 'f' && input != 'C' && input != 'F') {
+        while(input != 'C' && input != 'F') {
             System.out.print("console[c] or file[f] input: ");
             input = scan.next().charAt(0);
+            input = Character.toUpperCase(input);
         }
         return input;
     }
 
-    //when console option is selected
-    //generate a full shuffled deck of cards
-    public void handleConsole(Deck myDeck){
-        myDeck.generateWholeDeck();
-        myDeck.deckShuffle();
+    //get user to choose whether hit or stand
+    public char hitOrStand(){
+        Scanner scan = new Scanner(System.in);
+        char input = ' ';
+
+        while(input != 'H' && input != 'S') {
+            //get input from user
+            System.out.print("hit[h] or stand[s]: ");
+            input = scan.next().charAt(0);
+            input = Character.toUpperCase(input);
+        }
+        return input;
+    }
+
+    //get user to choose whether hit or stand OR SPLIT
+    public char hitStandSplit(){
+        Scanner scan = new Scanner(System.in);
+        char input = ' ';
+
+        while(input != 'H' && input != 'S' && input != 'D') {
+            //get input from user
+            System.out.print("hit[h] or stand[s] or split[d]: ");
+            input = scan.next().charAt(0);
+            input = Character.toUpperCase(input);
+        }
+        return input;
+    }
+
+    //deal each player and dealer two cards
+    public void dealTwoCards(Hand[] user, Deck deck){
+
+        for(int i=0; i<2; i++) {
+            user[i].addCard(deck.drawCard());
+            user[i].addCard(deck.drawCard());
+
+            System.out.printf("%s has: %s %n", user[i].getType(), user[i].toString());
+        }
+
+        for(int k=0; k<2; k++){
+            if(user[k].hasBlackjack()){
+                System.out.printf("%s has Blackjack \n", user[k].getType());
+            }
+        }
     }
 
     //read a text file and stores it in a single string
@@ -72,50 +111,10 @@ public class View {
         myDeck.generateGivenCards(cardList);
     }
 
-    //deal each player and dealer two cards
-    public void dealTwoCards(Hand[] user, Deck deck){
-
-        for(int i=0; i<2; i++) {
-            user[i].addCard(deck.drawCard());
-            user[i].addCard(deck.drawCard());
-
-            System.out.printf("%s has: %s %n", user[i].getType(), user[i].toString());
-        }
-
-        for(int k=0; k<2; k++){
-            if(user[k].hasBlackjack()){
-                System.out.printf("%s has Blackjack \n", user[k].getType());
-            }
-        }
-    }
-
-    //get user to choose whether hit or stand
-    public char hitOrStand(){
-        Scanner scan = new Scanner(System.in);
-        char input = ' ';
-
-        while(input != 'H' && input != 'S') {
-            //get input from user
-            System.out.print("hit[h] or stand[s]: ");
-            input = scan.next().charAt(0);
-            input = Character.toUpperCase(input);
-        }
-        return input;
-    }
-
-
-    //get user to choose whether hit or stand OR SPLIT
-    public char hitStandSplit(){
-        Scanner scan = new Scanner(System.in);
-        char input = ' ';
-
-        while(input != 'H' && input != 'S' && input != 'D') {
-            //get input from user
-            System.out.print("hit[h] or stand[s] or split[d]: ");
-            input = scan.next().charAt(0);
-            input = Character.toUpperCase(input);
-        }
-        return input;
+    //when console option is selected
+    public void handleConsole(Deck myDeck){
+        myDeck.generateWholeDeck();
+        myDeck.deckShuffle();
     }
 
     //when "hit" is selected
@@ -125,7 +124,6 @@ public class View {
         h.addCard(newCard);
         System.out.printf("%s has received a [%s]\n", h.getType(), newCard.toString());
     }
-
 
     //when "stand" is selected
     public void handleStandOption(Hand h){
@@ -179,28 +177,8 @@ public class View {
         return "stand";
     }
 
-    //determines who is the winner due to scores
-    public void checkWinner(Hand player, Hand dealer){
-
-        System.out.printf(player.getType() + " has: %s %n", player.toString());
-        System.out.printf(dealer.getType() + " has: %s %n", dealer.toString());
-        //the only time player wins is when player scores higher than dealer
-        if(player.getScore() > dealer.getScore()){
-            System.out.println("\n\n===> Player wins");
-        }else{
-            System.out.println("\n\n===> Dealer wins");
-        }
-    }
-
-    public void pressEnter(){
-        System.out.println("\nPress Enter to continue...");
-        try{
-            System.in.read();
-        }catch(Exception e){}
-    }
-
-    //returns false when both splitted hands bust
-    public boolean handleSplitOption(Hand user, Deck deck){
+    //returns "bust" when both splitted hands bust
+    public String handleSplitOption(Hand user, Deck deck){
 
         Hand[] split = new Hand[2];
         split[0] = new Hand(user.getType());
@@ -223,7 +201,7 @@ public class View {
         }
 
         if(split[0].bustCheck() && split[1].bustCheck()){
-            return false;
+            return "bust";
         }else if(split[0].bustCheck()){
             winner = 1;
         }else if(split[1].bustCheck()){
@@ -239,6 +217,27 @@ public class View {
 
 
         System.out.printf("===>%s'S BEST SCORE:  %d points %n",user.getType().toUpperCase() ,user.getScore());
-        return true;
+        return "stand";
+    }
+
+    //program is paused until Enter key is hit
+    public void pressEnter(){
+        System.out.println("\nPress Enter to continue...");
+        try{
+            System.in.read();
+        }catch(Exception e){}
+    }
+
+    //determines who is the winner due to scores
+    public void checkWinner(Hand player, Hand dealer){
+
+        System.out.printf(player.getType() + " has: %s %n", player.toString());
+        System.out.printf(dealer.getType() + " has: %s %n", dealer.toString());
+        //the only time player wins is when player scores higher than dealer
+        if(player.getScore() > dealer.getScore()){
+            System.out.println("\n\n===> Player wins");
+        }else{
+            System.out.println("\n\n===> Dealer wins");
+        }
     }
 }
