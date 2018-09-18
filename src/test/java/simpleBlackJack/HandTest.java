@@ -13,56 +13,145 @@ public class HandTest {
 
         assertEquals(user.getCard(0), ex);
     }
+    @Test
+    public void testAce1(){
+        Hand user = new Hand("Player");
+
+
+
+        Card card_1 = new Card("DQ");
+        Card card_2 = new Card("H8");
+        Card card_3 = new Card("CA");
+
+
+        //A as 1
+        user.addCard(card_1);
+        user.addCard(card_2);
+        user.addCard(card_3);
+
+        assertEquals(19, user.getScore());
+
+    }
+    @Test
+    public void testAce11(){
+        Hand user = new Hand("Player");
+
+        Card card_1 = new Card("DQ");
+        Card card_3 = new Card("CA");
+
+        //A as 11
+        user.addCard(card_1);
+        user.addCard(card_3);
+
+        assertEquals(21, user.getScore());
+    }
 
     @Test
-    public void testScore(){
-        Hand user1 = new Hand("Player");
-        Hand user2 = new Hand("Player");
-        Hand user3 = new Hand("Player");
-        Hand user4 = new Hand("Player");
+    public void testAce1and11(){
+        Hand user = new Hand("Player");
 
+        Card card_2 = new Card("H8");
+        Card card_3 = new Card("CA");
+        Card card_4 = new Card("DA");
+
+        //A as 1 and 11
+        user.addCard(card_4);
+        user.addCard(card_2);
+        user.addCard(card_3);
+        assertEquals(20, user.getScore());
+
+    }
+
+    @Test
+    public void testAce11then1(){
+
+        Hand user = new Hand("Player");
+
+        Card card_1 = new Card("DQ");
+        Card card_2 = new Card("H8");
+        Card card_3 = new Card("CA");
+
+        //A as 11 then 1
+        user.addCard(card_3);
+        user.addCard(card_1);
+        assertEquals(21, user.getScore());
+
+        user.addCard(card_2);
+        assertEquals(19, user.getScore());
+
+    }
+
+    @Test
+    public void test2AcesAs1(){
+        Hand user = new Hand("Player");
 
         Card card_1 = new Card("DQ");
         Card card_2 = new Card("H8");
         Card card_3 = new Card("CA");
         Card card_4 = new Card("DA");
 
-        //A as 11
-        user1.addCard(card_1);
-        user1.addCard(card_3);
 
-        assertEquals(21, user1.getScore());
 
-        //A as 1
-        user2.addCard(card_1);
-        user2.addCard(card_2);
-        user2.addCard(card_3);
+        //2 a's as 1
+        user.addCard(card_1);
+        user.addCard(card_2);
+        user.addCard(card_3);
+        user.addCard(card_4);
 
-        assertEquals(19, user2.getScore());
-
-        //A as 11 then 1
-        user3.addCard(card_3);
-        user3.addCard(card_1);
-        assertEquals(21, user3.getScore());
-
-        user3.addCard(card_2);
-        assertEquals(19, user3.getScore());
-
-        //A as 1 and 11
-        user4.addCard(card_4);
-        user4.addCard(card_2);
-        user4.addCard(card_3);
-        assertEquals(20, user4.getScore());
+        assertEquals(20, user.getScore());
     }
 
     @Test
-    public void testBlackjack(){
+    public void testFaceCards(){
         Hand user = new Hand("Player");
-        Hand user2 = new Hand("Dealer");
+
+        Card card_1 = new Card("DQ");
+        Card card_2 = new Card("SJ");
+        Card card_3 = new Card("HK");
+
+
+        user.addCard(card_1);
+        assertEquals(10, user.getScore());
+        user.removeCard(0);
+
+        user.addCard(card_2);
+        assertEquals(10, user.getScore());
+        user.removeCard(0);
+
+        user.addCard(card_3);
+        assertEquals(10, user.getScore());
+    }
+
+    @Test
+    public void testPlayerBlackjack(){
+        Hand user = new Hand("Player");
+        Hand user2 = new Hand("Player");
 
         Card card_1 = new Card("DQ");
         Card card_2 = new Card("H10");
         Card card_3 = new Card("CA");
+
+        //not a blackjack
+        user.addCard(card_1);
+        user.addCard(card_2);
+
+        assertFalse(user.hasBlackjack());
+
+        ///has a blackjack
+        user2.addCard(card_1);
+        user2.addCard(card_3);
+
+        assertTrue(user2.hasBlackjack());
+    }
+
+    @Test
+    public void testDealerBlackjack(){
+        Hand user = new Hand("Dealer");
+        Hand user2 = new Hand("Dealer");
+
+        Card card_1 = new Card("HK");
+        Card card_2 = new Card("S9");
+        Card card_3 = new Card("SA");
 
         //not a blackjack
         user.addCard(card_1);
