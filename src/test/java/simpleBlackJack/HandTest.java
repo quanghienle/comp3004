@@ -19,6 +19,7 @@ public class HandTest {
         Hand user1 = new Hand("Player");
         Hand user2 = new Hand("Player");
         Hand user3 = new Hand("Player");
+        Hand user4 = new Hand("Player");
 
 
         Card card_1 = new Card("DQ");
@@ -39,19 +40,25 @@ public class HandTest {
 
         assertEquals(19, user2.getScore());
 
-        //A as 11 and 1
-        user3.addCard(card_1);
-        user3.addCard(card_2);
+        //A as 11 then 1
         user3.addCard(card_3);
-        user3.addCard(card_4);
+        user3.addCard(card_1);
+        assertEquals(21, user3.getScore());
 
-        assertEquals(20, user3.getScore());
+        user3.addCard(card_2);
+        assertEquals(19, user3.getScore());
+
+        //A as 1 and 11
+        user4.addCard(card_4);
+        user4.addCard(card_2);
+        user4.addCard(card_3);
+        assertEquals(20, user4.getScore());
     }
 
     @Test
     public void testBlackjack(){
         Hand user = new Hand("Player");
-        Hand user2 = new Hand("Player");
+        Hand user2 = new Hand("Dealer");
 
         Card card_1 = new Card("DQ");
         Card card_2 = new Card("H10");

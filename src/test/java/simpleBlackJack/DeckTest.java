@@ -10,13 +10,15 @@ import static org.junit.Assert.*;
 public class DeckTest {
 
     @Test
-    public void testNumCards(){
-
+    public void testFullDeck(){
         //the whole legit deck of cards has 52 cards
         Deck myDeck = new Deck();
         myDeck.generateWholeDeck();
         assertEquals(52, myDeck.getNumCards());
+    }
 
+    @Test
+    public void testGivenDeck(){
         //deck with given cards
         Deck myDeck2 = new Deck();
         List<String> cards = new ArrayList<String>();
@@ -26,6 +28,7 @@ public class DeckTest {
 
         myDeck2.generateGivenCards(cards);
         assertEquals(3, myDeck2.getNumCards());
+
     }
 
     @Test
