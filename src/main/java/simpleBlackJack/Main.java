@@ -7,11 +7,14 @@ public class Main {
         Deck deck = new Deck();
         View view = new View();
 
+        //both player and dealer are stored in a single array
         Hand[] user = new Hand[2];
 
         user[0] = new Hand("Player");
         user[1] = new Hand("Dealer");
 
+
+        //choosing console vs file input
         char cf = view.inputOrConsole();
         if(cf == 'C'){
             view.handleConsole(deck);
@@ -20,12 +23,11 @@ public class Main {
             view.handleFileInput("./test files/test_5.txt", deck);
         }
 
-        //System.out.println("DECK: " + deck.toString());
+        //game starts by dealing each player two cards
         System.out.println("\n******* GAME BEGINS *******\n");
         view.dealTwoCards(user, deck);
 
-        //checking for blackjack
-
+        //pause
         view.pressEnter();
 
         //check for dealer first
@@ -38,20 +40,30 @@ public class Main {
         }
 
         for(int i=0;i<2; i++){
+            //when the first two cards are having a same rank
             if(user[i].hasIdenticalCards()){
+
                 System.out.printf("\n\n---- %s's turn----\n",user[i].getType());
+
+                //result can be "split" "bust" or "stand"
                 String result = view.userTurn(user[i], deck, true);
 
+                //when user prefers to split
                 if(result.equals("split")) {
-                    if (!view.handleSplitOption(user[i], deck)) {
+                    //if both splitted hands bust, then the other player wins, program ends
+                    if (view.handleSplitOption(user[i], deck).equals("bust")) {
                         System.out.printf("====> %s wins.", (i==0) ? "Dealer" : "Player");
                         return;
                     }
-                }else if(result.equals("bust")){
+                }
+                //when user hits and busts
+                else if(result.equals("bust")){
                     System.out.printf("====> %s wins.", (i==0) ? "Dealer" : "Player");
                     return;
                 }
-            }else{
+            }
+            //when first two cards are not identical
+            else{
                 System.out.printf("\n\n---- %s's turn----\n",user[i].getType());
                 if(view.userTurn(user[i], deck, false).equals("bust")){
                     System.out.printf("====> %s wins.", (i==0) ? "Dealer" : "Player");
@@ -59,51 +71,11 @@ public class Main {
                 }
             }
 
+            //pause
             view.pressEnter();
-
-        }
-/*
-        if(user[0].hasIdenticalCards()){
-            String result = view.userTurn(user[0], deck, true);
-
-            if(result.equals("split")) {
-                if (!view.handleSplitOption(user[0], deck)) {
-                    System.out.println("Player busts.\n\n====> Dealer wins.");
-                    return;
-                }
-            }else if(result.equals("bust")){
-                System.out.println("Player busts.\n\n====> Dealer wins.");
-                return;
-            }
-        }else{
-            if(view.userTurn(user[0], deck, false).equals("bust")){
-                System.out.println("Player busts.\n\n====> Dealer wins.");
-                return;
-            }
         }
 
-        view.pressEnter();
-
-        if(user[1].hasIdenticalCards()){
-            String result2 = view.userTurn(user[1], deck, true);
-
-            if(result2.equals("split")) {
-                if (!view.handleSplitOption(user[1], deck)) {
-                    System.out.println("Dealer busts.\n\n====> Player wins.");
-                    return;
-                }
-            }else if(result2.equals("bust")){
-                System.out.println("Dealer busts.\n\n====> Player wins.");
-                return;
-            }
-        }else{
-            if(view.userTurn(user[1], deck,false).equals("bust")){
-                System.out.println("Dealer busts.\n\n===> Player wins.");
-                return;
-            }
-        }
-        view.pressEnter();
-*/
+        //checking for winner
         view.checkWinner(user[0], user[1]);
     }
 }
