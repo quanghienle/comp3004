@@ -1,2 +1,2 @@
-# comp3004
-fall 2018 
+# blackjack
+classic blackjack using Java and JUnit
